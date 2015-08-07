@@ -1,0 +1,94 @@
+  <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0 ,user-scalable=no">
+ <link href="css/jquery.mobile-1.4.5.min.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/jquery.mobile.iscrollview.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/jquery.mobile.iscrollview-pull.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="stylesheets/demo.css" media="screen" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="javascripts/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="javascripts/demo.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="javascripts/iscroll.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.mobile.iscrollview.js" type="text/javascript"></script>
+    <script src="javascripts/pull-example.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.zrssfeed.min.js" type="text/javascript"></script>
+    <script src="js/fastclick.js" type="text/javascript"></script>
+    <script src="lib/my_js.js" type="text/javascript"></script>
+    <script src="phonegap.js"></script>
+<style>
+    #overflow {
+        border: 0px solid #000;
+        height: 60px;
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    #overflow .container div {
+        float: left;
+        width: 60px;
+        height: 45px;
+        float: left;
+    }
+</style>
+</head>    
+<body>
+<div data-role="page" id="currentorders">
+    <div data-role="header">
+        <h1>Orders</h1>
+    </div>
+    <div data-role="content">            
+    </div>
+    <footer data-role="footer" data-position="fixed">
+        <nav data-role="navbar">
+            <div id="overflow">
+                <div class="container">
+                    <div><a href="" class="yellow">item 1</a>
+                    </div>
+                    <div><a href="" class="orange">item 2</a>
+                    </div>
+                    <div><a href="" class="red">item 3</a>
+                    </div>
+                    <div><a href="" class="yellow">item 4</a>
+                    </div>
+                    <div><a href="" class="orange">item 5</a>
+                    </div>
+                    <div><a href="" class="red">item 6</a>
+                    </div>
+                    <div><a href="" class="red">item 7</a>
+                    </div>
+                    <div><a href="" class="red">item 8</a>
+                    </div>
+                    <div><a href="" class="red">item 9</a>
+                    </div>
+                    <div><a href="" class="red">item 10</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div data-role="footer">
+            <h3>Some info here</h3>
+        </div>
+    </footer>
+</div>        
+</body>
+<script>
+$( document ).on( "pageshow", "#currentorders",function(event,ui) { 
+    var width = 0;
+  $('#overflow .container div').each(function () {
+    width += $(this).outerWidth(true);
+    });
+  $('#overflow .container').css('width', width + "px");
+});
+$( document ).on( "touchstart", "#overflow .container div a",function(event,ui) { 
+   var width = 0;
+ $('#overflow .container div').each(function () {
+    width += $(this).outerWidth(true);
+ });
+ $('#overflow .container').css('width', width + "px");
+});
+
+</script>    
+</html>

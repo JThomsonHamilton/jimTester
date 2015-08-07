@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hamilton Student App</title>
+<!-- meta "viewport" tag sets screen width to pixel width of device -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- the line below references the jQuery mobile css -->
+<link rel="stylesheet" href="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+<!-- the line below references app-specific css -->
+<link rel="stylesheet" href="cmi.css" />
+    
+<!-- the line below references the jQuery core library -->
+<script src="lib/jquery.min.js"></script>
+<!-- the line below references the jQuery mobile library -->
+<script src="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!-- the line below references app-specific JavaScript -->
+<script src="lib/jquery.panzoom.js"></script>
+<script src="lib/jquery.mousewheel.js"></script>
+<!-- For RSS -->
+<script src="lib/jquery.zrssfeed.min.js" type="text/javascript"></script>
+    <script src="lib/my_js.js"></script>
+<script type="text/javascript" src="lib/iscroll.js"></script>
+
+</head>
+
+<body onload="loaded()">
+<!-- Start of home page which is list of phone numbers -->
+
+<!-- News -->
+<div data-role="page" id="news">
+   <div data-role="header" id="homeheader">
+      <h1>News</h1>
+   </div>
+<div id="wrapper">
+        <div id="scroller">
+            <div id="test" class="rssFeed"></div>
+        </div>
+</div>
+  <div data-role="footer" data-position="fixed" class="footer">
+		  <!-- Start of navigation bar -->
+	  <div data-role="navbar">
+		  <ul>
+			  <li><a href="index.html#phonenums" rel="external">Phone Nums</a></li>
+			  <li><a href="index.html#dininghrs" rel="external">Dining Hours</a></li>
+			  <li><a href="index.html#mappg" rel="external">Campus Map</a></li>
+			  <li><a href="news.html">Campus News</a></li>
+		  </ul>
+	  </div>
+
+  </div><!-- /footer -->
+</div>
+</body>
+</html>
