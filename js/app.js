@@ -50,17 +50,6 @@ function getNumbers(tx) {
 	       tx.executeSql(sql, [], getNumbers_success);
      });
 }
-/*
-function ckTable(tx, callBack,table){ 
-    var sql = "SELECT CASE WHEN tbl_name = '"+table+"' THEN 1 ELSE 0 END FROM sqlite_master WHERE tbl_name = '"+table+"' AND type = 'table'";
-    var result = [];
-   db.transaction(function (tx) {
-      tx.executeSql(sql, [], function(tx, rs){
-         var newcount = rs.rows.length;
-         callBack(newcount); 
-      }, callback_error);
-   });
-} */
 function getAudPref(tx) {
     var sql = "select audienceID from audPrefs"; 
      db.transaction(function (tx) {
@@ -82,12 +71,12 @@ function getNavigationPages(tx) {
                        db.transaction(function (tx) {
                                 tx.executeSql(navsql, [], function(tx,navresults) {
                                        var navlen = navresults.rows.length;
-                                        $('.dynNavbar').html('')
+                                        //$('.dynNavbar').html('')
                                         for(var i = 0; i < navlen; i++) {
                                             var navigationrow = navresults.rows.item(i);    
                                             var navIcon = navigationrow.navIcon;
-                                            var listitem = '<li class="ui-block-d"><a href="#phonenums"><i class="fa '+navIcon+' fa-2x"></i></a></li>';
-                                            $('.dynNavbar').append(listitem);
+                                            var listitem = '<div><a href="#phonenums" class="ui-link ui-btn"><i class="fa '+navIcon+' fa-2x"></i></a></div>';
+                                            $('.container').append(listitem);
                                         };
                                 });
                         });
@@ -104,10 +93,11 @@ loadPhoneList = function(items){
     var markup = ' <li><a href="tel:${phone}" data-rel="dialog">${name}<br><span class="smgrey">${phone}</span>{{if url}}<br><span class="smgrey website" data-url="${url}">Website</span>{{/if}}{{if email}}<span class="smgrey website" data-mailto="${email}">${email}</span>{{/if}}</a></li>';
     $.template("contactTemplate", markup);
     $.tmpl("contactTemplate", phonecontacts).appendTo('ul#phonenumlist');
-    $('#phonenumlist').listview("refresh");
+   
 	};
 function getNumbers_success(tx, results) {
     loadPhoneList(results);
+    $('#phonenumlist').listview("refresh");
 }
 function ckTable(tx, callBack,table){ 
     var sql = "SELECT CASE WHEN tbl_name = '"+table+"' THEN 1 ELSE 0 END FROM sqlite_master WHERE tbl_name = '"+table+"' AND type = 'table'";
@@ -341,7 +331,17 @@ function loadappPageToNavJson(data) {
 }
 /* Check to see if version is Stale */
 
-
+function navController(direction) {
+        var navitems = $('.hozNavbar').children().length;
+        var eachwidth= $( ".hozNavbar li" ).first().width();
+        var direction = direction;
+        var fullslide = (eachwidth * 2);
+        if (direction ==='left'){
+        $('.hozNavbar').animate({left: fullslide});
+        }else{
+        $('.hozNavbar').animate({right: fullslide});
+        }
+}
 
 
 // initial app load
@@ -375,7 +375,6 @@ $(document).on('pagebeforeshow', 'body', function () {
                } else {
                    //check versions then load whatever content you want here? or maybe just all for now just all
                    loadFullJson();
-                   loadPhoneJson();
                }
         }, table);
         var table = 'audPrefs';
@@ -399,6 +398,24 @@ $(document).on('pagebeforeshow', 'body', function () {
     }
     
 });
+
+$(document).on('pageshow', 'body', function (e, data) {
+   // navController('left');
+ 
+}); 
+$(document).on('click', '.navright', function (e, data) {
+    var navdirection = 'right';
+    navController(navdirection);
+}); 
+$(document).on('click', '.navleft', function (e, data) {
+    var navdirection = 'left';
+    navController(navdirection);
+   
+}); 
+$(document).on('pagebeforeshow', '#phonenums', function (e, data) {
+   loadPhoneJson();
+}); 
+
 //news rss load and rebind
 $(document).on('pagebeforeshow', '#news', function (e, data) {
     $('#news .iscroll-content').rssfeed('http://students.hamilton.edu/rss/articles.cfm?item=A9AAF6B5-FB82-2ADF-26A75A82CDDD1221', {
@@ -407,12 +424,13 @@ $(document).on('pagebeforeshow', '#news', function (e, data) {
             header: false
           }, rewriteClass);
 }); 
-
 // load campus map after page shows - don't know why I have to do this though.
 $(document).on('pageshow', '#map', function (e, data) {
     setTimeout(function () {
         $.getScript( "js/campus.map.js", function( data, textStatus, jqxhr ) {
         });
+
     }, 100);
 }); 
+
 // had to add handlers for external links for in app browser nonsense

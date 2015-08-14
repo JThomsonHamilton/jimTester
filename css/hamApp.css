@@ -1,5 +1,3 @@
-
-
 body {
 
   /* Disable Safari scrollbars, because jQuery Mobile annoyingly insists on setting the
@@ -8,7 +6,6 @@ body {
      transitions. But this causes a problem in desktop Safari if the height is <320px.
      If you resize to <320 in a desktop browser, you will see a scrollbar if you don't
      use this style.
-
      I haven't put this in jquery.mobile.iscrollview.css, because it has to be applied
      to <body>, and so it will affect the entire site/app. It is an appropriate
      setting for any site/app meant to use a page size fixed at the browser window size.
@@ -77,7 +74,6 @@ body {
 /* Demonstrate how to make headers/footer a different height for different orientations
    or screen sizes. This also demonstrates that the widget now (once again) measures the
    headers/footers on every resize.
-
    Unfortunately, the state of detecting mobile orientation on mobile devices is a mess.
    Mobile Safari doesn't support orientation media query, while iPad doesn't. There are
    various hacks involving max-width, max-height, max-device-width, etc. Fortunately, for
@@ -169,18 +165,12 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
      width:100%;
   }
 .iscroll-content {padding:0px;}
-#horizontalNavbar {overflow-x: scroll; /* 1 */
-  -webkit-overflow-scrolling: touch; /* 2 */}
-#horizontalNavbar ul {
-    text-align: justify; /* 3 */
-}
-#horizontalNavbar ul:after { /* 5 */
-  content: '';
-  display: inline-block;
-  width: 100%;
-}
 .iconfloat {float:left; margin-left: 7%; margin-top: 3%;}
-#horizontalNavbar li {
+.mytab {
+    width: 18% !important;  /* 12.5% for 8 tabs wide */
+    clear: none !important;  /* Prevent line break caused by ui-block-a */
+}
+.horizontalNavbar li {
   display: inline-block; /* 6 */
 }
 #mapContent { padding: 0; }
@@ -213,31 +203,24 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
 
 /* Force list items to be cached on WebKit
    See: cubiq.org/you-shall-not-flicker
-
    If this is NOT used, then scrolling long lists might exhibit a "flicker" when scrolling
    toward the bottom of the list, as well as exhibit slow and jerky until the first
    time the user has reached the bottom of the list.
-
    If this IS used, then the browser may be forced to cache the content in advance, resulting
    in smoother scrolling, but with the side-effect of increasing initial rendering time.
-
    This can more than DOUBLE initial rendering time if you are not careful with the selector. The
    recommended CSS at the above link is NOT optimal.
-
    You need to apply this judiciously. For example, if you know your scroller content consists
    of list items, use "li" not "*' to select. * as the right-most component of a select is
    horribly expensive. A small additional performance gain can be made by selecting
    iscroll-content instead of iscroll-scroller. You might get a
    glitch on a pull-up if you have one, but it's a small price to pay for doubling speed.
-
    It is important NOT to apply this to .iscroll-scroller itself. This will result in a huge
    performance loss. The second rule below gives performance on iOS devices very close to not
    using this at all.
-
    I use an @media tag to disable, because it is a safe way of disabling CSS that might contain
    comments. As well, you might like to enable this only for certain devices, which often
    can be detected using media queries.
-
 */
 
 /* This one will always work to eliminate the flicker, regardless of scroller content but
@@ -265,7 +248,6 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
    images rather than CSS-generated gradients,  because they have been proven faster than CSS
    gradients. If you are developing a website, using image gradients will increase the download
    time, both due to the size of the images (but generally small) and the additional round-trip(s).
-
    I eliminate text shadows as well, as these reportedly degrade performance on Android
    browsers.
 */
@@ -309,10 +291,4 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
   {
   background-image: none;
   }
-
-
-
-
-
-
 

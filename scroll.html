@@ -4,7 +4,7 @@
     <title>Hamilton College</title>
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     
@@ -16,7 +16,6 @@
     <script src="javascripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="javascripts/demo.js" type="text/javascript"></script>
     <script src="javascripts/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-   <script src="javascripts/iscroll.js" type="text/javascript"></script>
     <script src="javascripts/jquery.mobile.iscrollview.js" type="text/javascript"></script>
     <script src="javascripts/jquery.zrssfeed.min.js" type="text/javascript"></script>
     <script src="js/jquery.tmpl.min.js"></script>
@@ -25,7 +24,9 @@
     <script src="js/app.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
     <script src="phonegap.js"></script>
-    
+    <style>
+        .dynNavbar li {width: 65px; margin-left:20px; margin-right: 20px;}
+    </style>
       
 </head> 
 <body>
@@ -47,14 +48,13 @@
                 <li><a href="tel:1-315-282-5426">Campus Safety (Tip Now)
                     <br><span class="smgrey">315-282-5426</span></a>
                 </li>
-              <li><a href="scratch.html" data-rel="external" data-ajax="false">Test Page</a>
-                </li>
-                <li><a href="scroll.html" data-rel="external" data-ajax="false">Test Page</a>
+              <!--
+                <li><a href="indextest.html" data-rel="external" data-ajax="false">Test Page</a>
                 </li>
               
                <li><a href="statusbartest.html" data-rel="external" data-ajax="false">Status Bar Test</a>
                </li>
-             <!--
+             
                 <li>
                   <a href="#" onClick="window.open('http://angularjs.org','_blank','location=yes');return false;">Testing Blank</a>
                 </li>-->
@@ -67,32 +67,38 @@
             </ul>
          <br>
         </div>
-           <div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
-                    <div class="horizontalNavbar">
-                        <ul class="hozNavbar">
-                           <li class="mytab"><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
-                           </li>
-                            <li class="mytab"><a class="navright" href="#"><i class="fa fa-chevron-right fa-2x"></i></i></a>
-                           </li>
-                            <li class="mytab"><a href="#phonenums"><i class="fa fa-phone fa-2x">x</i></a>
-                           </li>
-                           <li class="mytab"><a href="#dininghrs"><i class="fa fa-cutlery fa-2x">y</i></a>
-                           </li>
-                           <li class="mytab"><a href="#map"><i class="fa fa-map-marker fa-2x">z</i></a>
-                           </li>
-                           <li class="mytab"><a href="#news"><i class="fa fa-newspaper-o fa-2x">zz</i></a>
-                           </li>
-                            <li class="mytab"><a class="navleft" href="#"><i class="fa fa-chevron-left fa-2x"></i></i></a>
-                           </li>
-                        </ul>
-                     </div>
-                </div>
+      <div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
+        <div class="horizontalNavbar">
+            <ul class="dynNavbar">
+               <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
+               </li>
+               <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
+               </li>
+               <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
+               </li>
+               <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
+               </li>
+                 <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
+               </li>
+               <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
+               </li>
+               <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
+               </li>
+               <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
+               </li>
+                 <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
+               </li>
+               <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
+               </li>
+               <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
+               </li>
+               <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
+               </li>
+            </ul>
+         </div>
+         
+      </div>
+      
       </div>
       <div data-role="page" id="dininghrs">
       <div data-id="header" data-position="fixed" data-role="header" data-tap-toggle="false" data-transition="none" class="pageheader">
@@ -266,33 +272,92 @@
                     <ul id="listing" data-role="listview" data-filter="true"></ul>	
                 </div>
 
-            </div> 
-    <script>
-$( document ).on( "pageshow", "#phonenums",function(event,ui) { 
-    var width = 0;
-  $('#overflow .container div').each(function () {
-    width += $(this).outerWidth(true);
+            </div>   
+<script>
+    $(function(){           
+    var step = 1;
+    var current = 0;
+    var maximum = $(".horizontalNavbar ul li").size();
+    var visible = 2;
+    var speed = 500;
+    var liSize = 120;
+    var height = 60;    
+    var ulSize = liSize * maximum;
+    var divSize = liSize * visible; 
+
+    $('.horizontalNavbar').css("width", "auto").css("height", height+"px").css("visibility", "visible").css("overflow", "hidden").css("position", "relative");
+    $(".horizontalNavbar ul li").css("list-style","none").css("display","inline");
+    $(".horizontalNavbar ul").css("width", ulSize+"px").css("left", -(current * liSize)).css("position", "absolute").css("white-space","nowrap").css("margin","0px").css("padding","5px");
+
+    $(".horizontalNavbar").swipeleft(function(event){
+        if(current + step < 0 || current + step > maximum - visible) {return; }
+        else {
+            current = current + step;
+            $('.horizontalNavbar ul').animate({left: -(liSize * current)}, speed, null);
+        }
+        return false;
     });
-  $('#overflow .container').css('width', width + "px");
+
+    $(".horizontalNavbar").swiperight(function(){
+        if(current - step < 0 || current - step > maximum - visible) {return; }
+        else {
+            current = current - step;
+            $('.horizontalNavbar ul').animate({left: -(liSize * current)}, speed, null);
+        }
+        return false;
+    });         
 });
-$( document ).on( "touchstart", "#overflow .container div a",function(event,ui) { 
-   var width = 0;
- $('#overflow .container div').each(function () {
-    width += $(this).outerWidth(true);
- });
- $('#overflow .container').css('width', width + "px");
-});
-        
-            var g_overlay = false;
+     var g_overlay = false;
             var g_color = "white";
-                  
+            
+            // Wait for Cordova to load
+            //
+            document.addEventListener("deviceready", onDeviceReady, false);
+            
+            // Cordova is ready
+            //
+            function onDeviceReady() {
+            	// add any initialization code here
+            }
+        
+        	function showStatusBar(show) {
+            	if (show) {
+            		StatusBar.show();
+                	StatusBar.overlaysWebView(g_overlay)
+            	}
+            	else
+                	StatusBar.hide();
+        	}
+        
+        	function overlayWebView(isOverlay) {
+            	g_overlay = isOverlay;
+            	StatusBar.overlaysWebView(g_overlay);
+        	}
+        
+        	function setColor(inColor) {
+            	g_color = inColor
+            	StatusBar.backgroundColorByName(g_color);
+        
+            	if (g_color === "black")
+                	StatusBar.styleLightContent();
+        	}
         	function defaultStyle() {
             	g_color = "white"
             	StatusBar.styleDefault();
             	StatusBar.backgroundColorByName(g_color);
         	}
         
-        </script>
+        	function lightContent() {
+            	StatusBar.styleLightContent();
+            	if (g_color === "white") {
+                	g_color = "black";
+                	StatusBar.backgroundColorByName(g_color);
+            	}
+        	}
+    showStatusBar(true);
+   overlayWebView(true);
+    lightContent();
+    </script>
   </body>
 </html>
 
