@@ -70,26 +70,11 @@ body {
     width:100%;
 }
 
-
-/* Demonstrate how to make headers/footer a different height for different orientations
-   or screen sizes. This also demonstrates that the widget now (once again) measures the
-   headers/footers on every resize.
-   Unfortunately, the state of detecting mobile orientation on mobile devices is a mess.
-   Mobile Safari doesn't support orientation media query, while iPad doesn't. There are
-   various hacks involving max-width, max-height, max-device-width, etc. Fortunately, for
-   this demo, we can use something simple. We want the header and footer to be smaller
-   in landscape because they make the scrollable area too small. So, just test max-height.
-   This will of course also make the header/footer smaller on a desktop browser with
-   very short height - which makes it easy to demonstrate. :) */
-
 .red {color:red; font-size: 1.2em;}
 .smgrey {color: gray; font-size: .8em;}
-
+footer {height:65px;width: 400px;}
 .ui-navbar a {
-  /* For demo, make portrait navbar the same height as iPhone tabbar, because using the
-     standard navbar height for portrait and a shorter navbar for landscape would make
-     the navbar unusably short. */
-     height: 47px;    /* + 2px margins = 49px */
+       height: 47px; 
 }
 a:visited {color:#000;}
 a:link {color:#000;}
@@ -115,7 +100,8 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
     background-color: #002f86;
     border: 0;
     color: #fff;
-    padding-top: 5px;
+    padding-top: 25px;
+    margin-bottom: 15px;
 }
 .footer {
     background: #ccc;
@@ -166,17 +152,23 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
   }
 .iscroll-content {padding:0px;}
 .iconfloat {float:left; margin-left: 7%; margin-top: 3%;}
-.mytab {
-    width: 18% !important;  /* 12.5% for 8 tabs wide */
-    clear: none !important;  /* Prevent line break caused by ui-block-a */
-}
-.horizontalNavbar li {
-  display: inline-block; /* 6 */
-}
+.hozNavbar {overflow: hidden; xwidth: 5000px;}
+/* this is a placeholder all dynamic pages will go in here*/
+#lastStatic {display: none;}
 #mapContent { padding: 0; }
 #map_canvas { width: 100%; }
 .map-point { position:absolute; z-index: 1000; width:20px; height: 30px; cursor:pointer; background: transparent url('../images/map-marker-blue.png') top left no-repeat;}
-
+.ui-content {margin-top:20px;}
+footer {height: 60px;}
+.container div {
+        float: left;
+    }
+.container div a{
+        width: 60px;
+        height: 60px;
+    margin: 0;
+    padding-top:20px;
+    }
 @media only screen and (max-height: 280px){
   .ui-header {
     height: 30px;
@@ -201,31 +193,6 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
     
 }
 
-/* Force list items to be cached on WebKit
-   See: cubiq.org/you-shall-not-flicker
-   If this is NOT used, then scrolling long lists might exhibit a "flicker" when scrolling
-   toward the bottom of the list, as well as exhibit slow and jerky until the first
-   time the user has reached the bottom of the list.
-   If this IS used, then the browser may be forced to cache the content in advance, resulting
-   in smoother scrolling, but with the side-effect of increasing initial rendering time.
-   This can more than DOUBLE initial rendering time if you are not careful with the selector. The
-   recommended CSS at the above link is NOT optimal.
-   You need to apply this judiciously. For example, if you know your scroller content consists
-   of list items, use "li" not "*' to select. * as the right-most component of a select is
-   horribly expensive. A small additional performance gain can be made by selecting
-   iscroll-content instead of iscroll-scroller. You might get a
-   glitch on a pull-up if you have one, but it's a small price to pay for doubling speed.
-   It is important NOT to apply this to .iscroll-scroller itself. This will result in a huge
-   performance loss. The second rule below gives performance on iOS devices very close to not
-   using this at all.
-   I use an @media tag to disable, because it is a safe way of disabling CSS that might contain
-   comments. As well, you might like to enable this only for certain devices, which often
-   can be detected using media queries.
-*/
-
-/* This one will always work to eliminate the flicker, regardless of scroller content but
-   is very slow at initial rendering. The scroller may not be initially responsive after
-   a page is first rendered */
 @media DISABLED {
   .iscroll-scroller,
   .iscroll-scroller * {
@@ -240,17 +207,6 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
     -webkit-transform: translateZ(0);
   }
 }
-
-/* Remove the background gradients from buttons in the scroller. It's very costly to scroll these
-   around, because they are really just generated bitmaps, after all. You can use these same
-   rules to style the up/down/hover appearance of listview buttons in the scroller. If you
-   do want to use gradients - particularly if building a native or webapp, consider using gradient
-   images rather than CSS-generated gradients,  because they have been proven faster than CSS
-   gradients. If you are developing a website, using image gradients will increase the download
-   time, both due to the size of the images (but generally small) and the additional round-trip(s).
-   I eliminate text shadows as well, as these reportedly degrade performance on Android
-   browsers.
-*/
 
 .iscroll-content .ui-listview li.ui-btn-up-c
   {
@@ -271,9 +227,6 @@ html head + body .ui-btn.ui-btn-a.ui-btn-active {background-color: #f6f6f6;
      width:100%;
   }
 
-/* If you want to change the text color or other text properties of listview buttons in the scroller,
-   you have to do it here, not above.
-*/
 .iscroll-content .ui-listview *.ui-btn-up-c a.ui-link-inherit
   {
   }

@@ -21,7 +21,7 @@
 -->
 <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "org.drivenmedia.cmiicd10"
+        id        = "edu.hamilton.studentappJTT"
         versionCode="10"
         version   = "1.0.0">
 
@@ -47,9 +47,6 @@
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="StatusBarBackgroundColor" value="#002F86" />
-    <preference name="StatusBarStyle" value="lightcontent" />
     <content src="index.html" />
 
     <gap:plugin name="org.apache.cordova.battery-status" />
@@ -70,7 +67,6 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
-    <gap:plugin name="org.apache.cordova.statusbar"/>
 
     <icon src="resources/android/icon/drawable-ldpi-icon.png" gap:platform="android" gap:qualifier="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" gap:platform="android" gap:qualifier="mdpi"/>

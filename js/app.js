@@ -22,9 +22,13 @@ function phoneChecks(tx){
                   });
 }
 function loadPhoneJson(tx){
+    setupDB();
     $.getJSON( "https://mercury.hamilton.edu:7075/appPages/ajax/getAppData.cfm", function( data ) { 
         db.transaction(function (tx) {
             var len = data.length;
+              if (len > 0) {
+                  tx.executeSql('Delete from phonenumbers');  
+              }
             for(var i = 0; i < len; i++) {
                 var id=data[i].id;
                 var letter=data[i].letter;           
@@ -59,7 +63,7 @@ function getAudPref(tx) {
 function getAudPref_success(tx, results) {
           
 }
-function getNavigationPages(tx) {
+function getNavigationandPages(tx) {
      var sql = "select audienceID from audPrefs"; 
      db.transaction(function (tx) {
             tx.executeSql(sql, [], function(tx,results) {
@@ -67,37 +71,74 @@ function getNavigationPages(tx) {
                 for(var i = 0; i < len; i++) {
                   var audience = results.rows.item(i);                
                   var audienceID = audience.audienceID;
-                  var navsql = "Select p.pagetitle,p.pageactive,p.lastupdated,p.lastupdatedUsername,p.id,n.navtitle,n.navicon,n2a.navorder from Pages p Inner Join appPageToNav apn ON p.id = apn.pageid Inner Join appNavs n on apn.navid = n.id Inner Join appNavToAudience n2a on n.id = n2a.navid where n2a.audid ='"+audienceID+"'"; 
-                       db.transaction(function (tx) {
-                                tx.executeSql(navsql, [], function(tx,navresults) {
+                buildPages(audienceID);    
+                  var navsql = "select n.navtitle,n.navicon,n2a.navlink,n2a.navorder from appNavs n Inner Join appNavToAudience n2a on n.id = n2a.navid where n2a.audid ='"+audienceID+"' order by navorder"; 
+                       db.transaction(function (tx) {      
+                                    tx.executeSql(navsql, [], function(tx,navresults) {
                                        var navlen = navresults.rows.length;
-                                        //$('.dynNavbar').html('')
+                                       $('.dynNavbar').html('');
+                                        var pagerNavTemplate = '<div><a href="#" class="navright ui-link ui-btn"><i class="fa fa-chevron-right fa-2x"></i></a></div>';
                                         for(var i = 0; i < navlen; i++) {
-                                            var navigationrow = navresults.rows.item(i);    
+                                            var navigationrow = navresults.rows.item(i);  
+                                            var navlink = navigationrow.navlink;
                                             var navIcon = navigationrow.navIcon;
-                                            var listitem = '<div><a href="#phonenums" class="ui-link ui-btn"><i class="fa '+navIcon+' fa-2x"></i></a></div>';
-                                            $('.container').append(listitem);
+                                            var navTemplate = '<div><a href="#'+navlink+'" class="ui-link ui-btn"><i class="fa '+navIcon+' fa-2x"></i></a></div>';
+                                            $('.dynNavbar').append(navTemplate);
+                                            
+                                            // if (i == 4){
+                                             //$('.dynNavbar').append(pagerNavTemplate);
+                                            // }else{
+                                         //   var navTemplate = '<div><a href="#'+navlink+'" class="ui-link ui-btn"><i class="fa '+navIcon+' fa-2x"></i></a></div>';
+                                            //$('.dynNavbar').append(navTemplate);
+                                           //  };
                                         };
+                                  
+                                   attachScroller();
+                                    
                                 });
                         });
                 };
             });
      });
 }
+function buildPages(audienceID) {
+    var audienceID
+    var pageTemplate='<div data-role="page" id="${id}" class="dyn"><div data-id="header" data-position="fixed" data-role="header" data-tap-toggle="false" data-transition="none" class="pageheader"><i class="fa fa-chevron-left fa-2x iconfloat"></i><div class="hamicon"><img src="resources/ios/icon/icon-72@2x.png" class="imgResponsive" /></div><h1>${pagetitle}</h1></div><div data-iscroll="" data-role="content" class="ui-content"><div>${pagecontents}</div></div> <footer data-role="footer" data-position="fixed" data-id="foo1"><nav data-role="navbar"><div class="container dynNavbar"><div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div></div></nav></footer>';
+     var sql = "Select p.pagetitle,p.pagecontents,p.id from Pages p Inner Join appPageToNav apn ON p.id = apn.pageid Inner Join appNavs n on apn.navid = n.id Inner Join appNavToAudience n2a on n.id = n2a.navid where p.pageactive=1 and n2a.audid ='"+audienceID+"'"; 
+    db.transaction(function (tx) {
+        tx.executeSql(sql, [], function(tx,results) {
+               var pagelen = results.rows.length;
+                var pagearray=[];
+                for(var i = 0; i < pagelen; i++) {
+                   pagearray.push(results.rows.item(i))
+                };
+            var currentpagecount = $(".dyn").length;
+            if (currentpagecount < pagelen) {
+                $.template("attachPageTemplate", pageTemplate);
+                $.tmpl("attachPageTemplate", pagearray).insertAfter('#lastStatic');
+             
+            };
+            });
+    });
+ 
+};
 loadPhoneList = function(items){
     var phonecontacts = [];
     for (i = 0; i < items.rows.length; i++)
     {
         phonecontacts.push(items.rows.item(i));
     }   
-    var markup = ' <li><a href="tel:${phone}" data-rel="dialog">${name}<br><span class="smgrey">${phone}</span>{{if url}}<br><span class="smgrey website" data-url="${url}">Website</span>{{/if}}{{if email}}<span class="smgrey website" data-mailto="${email}">${email}</span>{{/if}}</a></li>';
-    $.template("contactTemplate", markup);
+    var phonetemplate = ' <li><a href="tel:${phone}" data-rel="dialog">${name}<br><span class="smgrey">${phone}</span>{{if url}}<br><span class="smgrey website" data-url="${url}">Website</span>{{/if}}{{if email}}<span class="smgrey website" data-mailto="${email}">${email}</span>{{/if}}</a></li>';
+    var permphones ='<li><a href="tel:1-847-555-5555"><span class="red">CAMPUS SAFETY (EMERGENCY)</span><br><span class="smgrey">315-859-4000</span></a</li><li><a href="tel:1-315-859-4141">Campus Safety (Non-Emergency)<br><span class="smgrey">315-859-4141</span></a></li><li><a href="tel:1-315-282-5426">Campus Safety (Tip Now) <br><span class="smgrey">315-282-5426</span></a></li><li><a href="scratch.html" data-rel="external" data-ajax="false">Test Page</a></li><li><a href="scroll.html" data-rel="external" data-ajax="false">Test Page</a></li><li><a href="custom.html" data-rel="external" data-ajax="false">Scroller</a></li>';
+    $('#phonenumlist').html('');
+    $.template("contactTemplate", phonetemplate);
     $.tmpl("contactTemplate", phonecontacts).appendTo('ul#phonenumlist');
-   
+    $("#phonenumlist").prepend(permphones);
+    $('#phonenumlist').listview("refresh");
 	};
 function getNumbers_success(tx, results) {
     loadPhoneList(results);
-    $('#phonenumlist').listview("refresh");
+    
 }
 function ckTable(tx, callBack,table){ 
     var sql = "SELECT CASE WHEN tbl_name = '"+table+"' THEN 1 ELSE 0 END FROM sqlite_master WHERE tbl_name = '"+table+"' AND type = 'table'";
@@ -124,7 +165,7 @@ function checkConnection() {
 $(function () {
     FastClick.attach(document.body);
 });
-
+// had to add handlers for external links for in app browser nonsense
 function handleExternalURLs() {
     // Handle click events for all external URLs
     if (device.platform.toUpperCase() === 'ANDROID') {
@@ -198,8 +239,7 @@ function BuildContentTables(tx) {
             "id varchar(50) PRIMARY KEY, " +
             "navTitle VARCHAR(200), " +
             "navIcon VARCHAR(300), " +
-            "navAudience VARCHAR(300), " +
-            "version INT)";
+            "navAudience VARCHAR(300))";
      db.transaction(function (tx) 
                         {
                              tx.executeSql(navsql);
@@ -210,6 +250,7 @@ function BuildContentTables(tx) {
             "id varchar(50) PRIMARY KEY, " +
             "navid VARCHAR(50), " +
             "audid VARCHAR(50), " +
+            "navlink VARCHAR(300), "+
             "navorder int )";
      db.transaction(function (tx) 
                         {
@@ -227,7 +268,6 @@ function BuildContentTables(tx) {
                             tx.executeSql(pagetonavsql);
                           });
        
-    
 }
 /* Pull full JSON Feed */
 function loadFullJson(){
@@ -294,8 +334,7 @@ function loadNavJson(data) {
             var navTitle=data[i].navTitle;           
             var navIcon=data[i].navIcon;  
             var navAudience=data[i].navAudience; 
-            var version=data[i].version; 
-            transaction.executeSql('INSERT INTO appNavs (id,navTitle, navIcon, navAudience, version) VALUES (?,?,?,?,?)',[id, navTitle, navIcon, navAudience,version]);
+            transaction.executeSql('INSERT INTO appNavs (id,navTitle, navIcon, navAudience) VALUES (?,?,?,?)',[id, navTitle, navIcon, navAudience]);
         }
     });
 }
@@ -310,7 +349,8 @@ function loadappNavToAudienceJson(data) {
             var navid=data[i].navid;           
             var audid=data[i].audid;  
             var navorder=data[i].navorder; 
-            transaction.executeSql('INSERT INTO appNavToAudience (id,navid, audid, navorder) VALUES (?,?,?,?)',[id, navid, audid, navorder]);
+             var navlink=data[i].navlink; 
+            transaction.executeSql('INSERT INTO appNavToAudience (id,navid, audid, navorder, navlink) VALUES (?,?,?,?,?)',[id, navid, audid, navorder,navlink]);
         }
     });
 }
@@ -331,24 +371,18 @@ function loadappPageToNavJson(data) {
 }
 /* Check to see if version is Stale */
 
-function navController(direction) {
-        var navitems = $('.hozNavbar').children().length;
-        var eachwidth= $( ".hozNavbar li" ).first().width();
-        var direction = direction;
-        var fullslide = (eachwidth * 2);
-        if (direction ==='left'){
-        $('.hozNavbar').animate({left: fullslide});
-        }else{
-        $('.hozNavbar').animate({right: fullslide});
-        }
+
+function attachScroller() {
+           $(".container").owlCarousel({
+      items : 6, //10 items above 1000px browser width
+      itemsMobile : [500,5] // itemsMobile disabled - inherit from itemsTablet option   
+      });
+
 }
-
-
 // initial app load
 $(document).on("pagecontainerbeforechange", function (event, ui) {
     onDeviceReady();
     handleExternalURLs();
-    
 });
 $(document).on('pageshow', '#phonenums', function (e, data) {
     // this won't work need to check to see if there is a db if not then load it if yes then show it.
@@ -358,7 +392,7 @@ $(document).on('pageshow', '#phonenums', function (e, data) {
 //document.addEventListener('deviceready', onDeviceReady, false);
 
 // main worker event, find out if the db is there if the data is stale etc.
-$(document).on('pagebeforeshow', 'body', function () {
+$(document).on('pagecontainerbeforecreate', 'body', function () {
     //use this function to find out if the app has access to the internet
     checkConnection();
     if (connectionStatus === 'online') {
@@ -384,38 +418,27 @@ $(document).on('pagebeforeshow', 'body', function () {
                   setAudiencePrefTable();
                   //populate pref table ( later will be based on the user choice)
                   PopulateAudiencePrefTable();
-                    getNavigationPages();
+                    getNavigationandPages();
                } else {
                    //it exists get all the pages.
                     PopulateAudiencePrefTable();
                    // this function builds the pages and the navigation
-                    getNavigationPages();
+                    getNavigationandPages();
                }
         }, table);
        
     }else {
-        
     }
-    
 });
 
-$(document).on('pageshow', 'body', function (e, data) {
-   // navController('left');
- 
-}); 
-$(document).on('click', '.navright', function (e, data) {
-    var navdirection = 'right';
-    navController(navdirection);
-}); 
-$(document).on('click', '.navleft', function (e, data) {
-    var navdirection = 'left';
-    navController(navdirection);
-   
-}); 
 $(document).on('pagebeforeshow', '#phonenums', function (e, data) {
    loadPhoneJson();
 }); 
-
+$(document).on('pagebeforeshow', '.dyn', function (e, data) {
+        var pageid = ($.mobile.activePage.attr('id'));
+        var htmlcontent = $('#'+pageid+'>.ui-content>.iscroll-scroller>.iscroll-content div').text();
+        $('#'+pageid+'>.ui-content>.iscroll-scroller>.iscroll-content').html('').html(htmlcontent);
+}); 
 //news rss load and rebind
 $(document).on('pagebeforeshow', '#news', function (e, data) {
     $('#news .iscroll-content').rssfeed('http://students.hamilton.edu/rss/articles.cfm?item=A9AAF6B5-FB82-2ADF-26A75A82CDDD1221', {
@@ -432,5 +455,3 @@ $(document).on('pageshow', '#map', function (e, data) {
 
     }, 100);
 }); 
-
-// had to add handlers for external links for in app browser nonsense

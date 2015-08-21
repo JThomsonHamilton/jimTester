@@ -5,13 +5,11 @@
     
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    
     <link href="css/jquery.mobile-1.4.5.min.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="stylesheets/jquery.mobile.iscrollview.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="stylesheets/jquery.mobile.iscrollview-pull.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="css/hamApp.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="css/owl.carousel.css" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="javascripts/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="javascripts/demo.js" type="text/javascript"></script>
@@ -24,9 +22,8 @@
     <script src="js/fastclick.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
     <script src="js/utils.js" type="text/javascript"></script>
+      <script src="js/owl.carousel.js"></script>
     <script src="phonegap.js"></script>
-    
-      
 </head> 
 <body>
     <div data-role="page" id="phonenums">
@@ -38,22 +35,7 @@
       
       <div data-iscroll="" data-role="content" class="ui-content"> 
           <ul data-role="listview" class="widelist" id="phonenumlist" data-filter="true" data-autodividers="true">
-                <li><a href="tel:1-847-555-5555"><span class="red">CAMPUS SAFETY (EMERGENCY)</span>
-                    <br><span class="smgrey">315-859-4000</span></a>
-                </li>
-                <li><a href="tel:1-315-859-4141">Campus Safety (Non-Emergency)
-                    <br><span class="smgrey">315-859-4141</span></a>
-                </li>
-                <li><a href="tel:1-315-282-5426">Campus Safety (Tip Now)
-                    <br><span class="smgrey">315-282-5426</span></a>
-                </li>
-              <li><a href="scratch.html" data-rel="external" data-ajax="false">Test Page</a>
-                </li>
-                <li><a href="scroll.html" data-rel="external" data-ajax="false">Test Page</a>
-                </li>
-              
-               <li><a href="statusbartest.html" data-rel="external" data-ajax="false">Status Bar Test</a>
-               </li>
+                
              <!--
                 <li>
                   <a href="#" onClick="window.open('http://angularjs.org','_blank','location=yes');return false;">Testing Blank</a>
@@ -66,40 +48,51 @@
              
             </ul>
          <br>
-        </div>
-           <div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
-                    <div class="horizontalNavbar">
-                        <ul class="hozNavbar">
-                           <li class="mytab"><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
-                           </li>
-                           <li class="mytab"><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
-                           </li>
-                            <li class="mytab"><a class="navright" href="#"><i class="fa fa-chevron-right fa-2x"></i></i></a>
-                           </li>
-                            <li class="mytab"><a href="#phonenums"><i class="fa fa-phone fa-2x">x</i></a>
-                           </li>
-                           <li class="mytab"><a href="#dininghrs"><i class="fa fa-cutlery fa-2x">y</i></a>
-                           </li>
-                           <li class="mytab"><a href="#map"><i class="fa fa-map-marker fa-2x">z</i></a>
-                           </li>
-                           <li class="mytab"><a href="#news"><i class="fa fa-newspaper-o fa-2x">zz</i></a>
-                           </li>
-                            <li class="mytab"><a class="navleft" href="#"><i class="fa fa-chevron-left fa-2x"></i></i></a>
-                           </li>
-                        </ul>
-                     </div>
-                </div>
-      </div>
+               </div>
+        
+           
+     
+    <footer data-role="footer" data-position="fixed" data-id="foo1">
+        <nav data-role="navbar">
+              <div class="container dynNavbar" >
+                 
+                 <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div ><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                      <div><a href="#" class="navright"><i class="fa fa-chevron-right fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                  
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+              </div>
+        </nav>
+    </footer>
+         </div>
       <div data-role="page" id="dininghrs">
       <div data-id="header" data-position="fixed" data-role="header" data-tap-toggle="false" data-transition="none" class="pageheader">
           <i class="fa fa-chevron-left fa-2x iconfloat"></i>
           <div class="hamicon"><img src="resources/ios/icon/icon-72@2x.png" class="imgResponsive" /></div><h1>Dining Hours</h1>
       </div>
-      <div class="ui-content" data-role="content" tabindex="-1" role="main" >
+      <div class="ui-content" data-role="content" role="main" >
          <div data-role="collapsibleset" data-theme="a" data-content-theme="a">
             <div data-role="collapsible" class="hrstext">
                <h3>Commons</h3>
@@ -165,22 +158,41 @@
             </div>
          </div>
          <!-- /content -->
-            <div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
-                <div data-role="navbar" class="horizontalNavbar">
-                    <ul>
-                       <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
-                       </li>
-                       <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
-                       </li>
-                       <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
-                       </li>
-                       <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
-                       </li>
-                    </ul>
-                 </div>
-            </div>
+        </div>
+             <footer data-role="footer" data-position="fixed" data-id="foo1">
+        <nav data-role="navbar">
+             <div class="container dynNavbar">
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                      <div><a href="#" class="navright"><i class="fa fa-chevron-right fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                  
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                </div>
+        </nav>
+    </footer>
       </div>
-   </div>
     
   <div data-role="page" id="news">
       <div data-id="header" data-position="fixed" data-role="header" data-tap-toggle="false" data-transition="none" class="pageheader">
@@ -191,21 +203,41 @@
             <div id="feed" class="rssFeed" ></div>
         </div>
       <!-- /content -->
-
-       <div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
-         <!-- Start of navigation bar -->
-         <div data-role="navbar" class="horizontalNavbar">
-            <ul>
-               <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
-               </li>
-               <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
-               </li>
-               <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
-               </li>
-               <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
-               </li>
-            </ul>
-         </div>
+      
+        <footer data-role="footer" data-position="fixed" data-id="foo1">
+        <nav data-role="navbar">
+              <div class="container owl-carousel dynNavbar">
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                      <div><a href="#" class="navright"><i class="fa fa-chevron-right fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                  
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                </div>
+        </nav>
+    </footer>
+      </div>
          <!-- end of navigation bar -->
 
       </div>
@@ -225,30 +257,45 @@
 		</div>
       
       <div data-iscroll="" data-role="content" class="ui-content"> 
-	   
-        
-		
-		
 		<div id="mapContent" data-role="content">
 			<div id="map_canvas"></div>
-		</div>
-
           </div>
+       </div>
 	
 	
-<div data-id="footer" data-position="fixed" data-role="footer" data-tap-toggle="false" data-transition="none" class="footer">
-        <div data-role="navbar">
-             <ul>
-               <li><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a>
-               </li>
-               <li><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a>
-               </li>
-               <li><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a>
-               </li>
-               <li><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a>
-               </li>
-            </ul>
-         </div>
+ <footer data-role="footer" data-position="fixed" data-id="foo1">
+        <nav data-role="navbar">
+              <div class="container owl-carousel dynNavbar">
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                      <div><a href="#" class="navright"><i class="fa fa-chevron-right fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                  
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                    <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                     <div><a href="#phonenums"><i class="fa fa-phone fa-2x"></i></a></div>
+                    <div><a href="#dininghrs"><i class="fa fa-cutlery fa-2x"></i></a></div>
+                    
+                    <div><a href="#map"><i class="fa fa-map-marker fa-2x"></i></a></div>
+         
+                    <div><a href="#news"><i class="fa fa-newspaper-o fa-2x"></i></a></div>
+                </div>
+        </nav>
+    </footer>
       </div>
      
     <script id="listTmpl" type="text/x-jquery-tmpl">
@@ -266,33 +313,9 @@
                     <ul id="listing" data-role="listview" data-filter="true"></ul>	
                 </div>
 
-            </div> 
-    <script>
-$( document ).on( "pageshow", "#phonenums",function(event,ui) { 
-    var width = 0;
-  $('#overflow .container div').each(function () {
-    width += $(this).outerWidth(true);
-    });
-  $('#overflow .container').css('width', width + "px");
-});
-$( document ).on( "touchstart", "#overflow .container div a",function(event,ui) { 
-   var width = 0;
- $('#overflow .container div').each(function () {
-    width += $(this).outerWidth(true);
- });
- $('#overflow .container').css('width', width + "px");
-});
-        
-            var g_overlay = false;
-            var g_color = "white";
-                  
-        	function defaultStyle() {
-            	g_color = "white"
-            	StatusBar.styleDefault();
-            	StatusBar.backgroundColorByName(g_color);
-        	}
-        
-        </script>
+            </div>
+<div id="lastStatic"></div>
+
   </body>
 </html>
 
